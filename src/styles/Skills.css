@@ -1,0 +1,91 @@
+.skills {
+  padding: 5rem 4rem;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.skills-heading {
+  font-size: 2.2rem;
+  margin-bottom: 3rem;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.skill-card {
+  background-color: var(--bg-dark-secondary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  overflow: hidden;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--moonstone);
+}
+
+.skill-card h3 {
+  color: var(--moonstone);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  border: 1px solid var(--border);
+  opacity: 0;
+}
+
+.reveal-visible .skill-tag {
+  animation: diceFall 0.9s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+}
+
+@keyframes diceFall {
+  0% {
+    opacity: 0;
+    transform: translate(var(--fall-x), -130px) rotate(calc(var(--fall-rot) * 2));
+  }
+  45% {
+    opacity: 1;
+    transform: translate(var(--fall-x), 8px) rotate(var(--fall-rot));
+  }
+  60% {
+    transform: translate(var(--fall-x), -14px) rotate(calc(var(--fall-rot) * 0.6));
+  }
+  75% {
+    transform: translate(var(--fall-x), 5px) rotate(calc(var(--fall-rot) * 0.3));
+  }
+  85% {
+    transform: translate(var(--fall-x), -4px) rotate(var(--fall-rot));
+  }
+  100% {
+    opacity: 1;
+    transform: translate(var(--fall-x), 0) rotate(var(--fall-rot));
+  }
+}
+
+@media (max-width: 768px) {
+  .skills {
+    padding: 3rem 1.5rem;
+    min-height: auto;
+  }
+}

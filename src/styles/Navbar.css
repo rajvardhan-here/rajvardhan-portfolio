@@ -3,7 +3,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.2rem 4rem;
-  background-color: var(--bg-dark-secondary);
+  background-color: rgba(17, 23, 43, 0.85);
+  backdrop-filter: blur(10px);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -54,8 +55,8 @@
 }
 
 .download-btn {
-  background-color: var(--vanilla);
-  color: var(--bg-dark);
+  background-color: var(--moonstone);
+  color: #ffffff;
   border: none;
   padding: 0.6rem 1.4rem;
   border-radius: 6px;

@@ -3,7 +3,7 @@ import '../styles/Navbar.css';
 
 function Navbar() {
   const [activeLink, setActiveLink] = useState('Home');
-  const links = ['Home', 'About', 'Skills', 'Services', 'Portfolio', 'Contact'];
+  const links = ['Home', 'About', 'Skills', 'Portfolio', 'Contact'];
 
   return (
     <nav className="navbar">
@@ -23,7 +23,7 @@ function Navbar() {
 
       <div className="nav-right">
         <button className="theme-toggle">🌙</button>
-        <button className="download-btn">Download CV ⬇</button>
+        <a href="/resume.pdf" download className="download-btn">Download CV ⬇</a>
       </div>
     </nav>
   );

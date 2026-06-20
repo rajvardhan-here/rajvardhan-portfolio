@@ -2,7 +2,7 @@
   --bg-dark: #0a0e1a;
   --bg-dark-secondary: #11172b;
   --vanilla: #FFEBAF;
-  --moonstone: #4A8FA6;
+  --moonstone: #4C9DB0;
   --text-light: #ffffff;
   --text-muted: #b0b8c8;
   --border: #1f2740;
@@ -27,6 +27,7 @@ html {
 
 body {
   background-color: var(--bg-dark);
+  background-image: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.025) 0px, rgba(255, 255, 255, 0.025) 1px, transparent 1px, transparent 14px);
   color: var(--text-light);
   font-family: var(--sans);
   line-height: 1.5;
@@ -57,6 +58,42 @@ img {
 #root {
   min-height: 100vh;
   width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+#root::before,
+#root::after {
+  content: '';
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(130px);
+  z-index: -1;
+  pointer-events: none;
+  animation: pulseGlow 8s ease-in-out infinite;
+}
+
+#root::before {
+  background: var(--moonstone);
+  opacity: 0.18;
+  top: -120px;
+  right: -120px;
+}
+
+#root::after {
+  background: var(--vanilla);
+  opacity: 0.07;
+  bottom: -120px;
+  left: -120px;
+  animation-delay: 2s;
+}
+
+section {
+  scroll-margin-top: 80px;
+  position: relative;
+  z-index: 1;
 }
 
 h1, h2, h3 {
@@ -83,4 +120,14 @@ h2 {
 
 p {
   color: var(--text-muted);
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }

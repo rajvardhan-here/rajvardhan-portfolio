@@ -4,7 +4,7 @@ import '../styles/Hero.css';
 
 function Hero() {
   return (
-    <section className="hero">
+    <section id="home" className="hero">
       <div className="hero-image-wrapper">
         <img src={heroImg} alt="Rajvardhan" className="hero-image" />
       </div>
@@ -17,8 +17,8 @@ function Hero() {
 
         <div className="hero-socials">
           <a href="https://github.com/rajvardhan-here" target="_blank" rel="noreferrer"><FaGithub /></a>
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer"><FaLinkedin /></a>
-          <a href="https://x.com" target="_blank" rel="noreferrer"><FaTwitter /></a>
+          <a href="https://linkedin.com/in/rajvardhann" target="_blank" rel="noreferrer"><FaLinkedin /></a>
+          <a href="https://x.com/X_rajvardhann" target="_blank" rel="noreferrer"><FaTwitter /></a>
         </div>
 
         <div className="hero-buttons">
