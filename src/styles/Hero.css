@@ -1,0 +1,123 @@
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  padding: 4rem 4rem 2rem;
+  flex-wrap: wrap;
+}
+
+.hero-image-wrapper {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image-wrapper::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--moonstone) 0%, transparent 70%);
+  opacity: 0.4;
+  filter: blur(30px);
+  z-index: 0;
+}
+
+.hero-image {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--moonstone);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content {
+  max-width: 520px;
+}
+
+.hero-greeting {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-name {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-role {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+.hero-role span {
+  color: var(--moonstone);
+}
+
+.hero-desc {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.hero-socials {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.hero-socials a {
+  color: var(--text-light);
+  transition: color 0.2s ease;
+}
+
+.hero-socials a:hover {
+  color: var(--moonstone);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-primary {
+  background-color: var(--moonstone);
+  color: var(--bg-dark);
+  padding: 0.7rem 1.6rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--vanilla);
+  border: 2px solid var(--vanilla);
+  padding: 0.7rem 1.6rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1.5rem;
+  }
+  .hero-content {
+    max-width: 100%;
+  }
+  .hero-socials, .hero-buttons {
+    justify-content: center;
+  }
+}
