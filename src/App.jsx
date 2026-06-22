@@ -6,13 +6,13 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Reveal from './components/Reveal';
-import IntroReveal from './components/IntroReveal';
+import LoadingScreen from './components/LoadingScreen';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <IntroReveal />
+      <LoadingScreen />
       <Navbar />
       <Hero />
       <Reveal><About /></Reveal>
@@ -24,4 +24,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
