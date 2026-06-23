@@ -33,11 +33,12 @@
   height: 100%;
 }
 
+/* IMAGE: ~10% smaller than before */
 .hero-photo {
   position: relative;
   z-index: 1;
-  max-height: 500px;
-  width: 85%;
+  max-height: 450px;
+  width: 76%;
   object-fit: contain;
   object-position: bottom center;
   filter: drop-shadow(0 20px 40px rgba(79, 117, 255, 0.12));
@@ -116,10 +117,17 @@
   color: var(--text-body);
   line-height: 1.7;
   max-width: 440px;
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.4rem;
 }
 
+/* ACTIONS: two rows */
 .hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.hero-cta-row {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -157,10 +165,7 @@
 .btn-view-project:hover {
   transform: translateY(-2px) scale(1.04);
   box-shadow: 0 0 0 4px rgba(249,115,22,0.25), 0 12px 30px rgba(249,115,22,0.45);
-  animation: glowPulse 1.5s ease-in-out infinite;
 }
-
-.btn-view-project span { position: relative; z-index: 1; }
 
 .btn-lets-connect {
   font-weight: 600;
@@ -176,9 +181,11 @@
   border-color: var(--blue);
 }
 
+/* SOCIALS row */
 .hero-socials {
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .social-btn {
@@ -191,19 +198,26 @@
   align-items: center;
   justify-content: center;
   font-size: 0.95rem;
-  color: var(--text-heading);
   transition: all 0.25s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .social-btn:hover {
-  background: var(--text-heading);
-  color: white;
-  transform: translateY(-4px) scale(1.12);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18), 0 0 0 3px rgba(79, 117, 255, 0.2);
+  transform: translateY(-4px) scale(1.15);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   border-color: transparent;
+  background: white;
 }
 
+/* Brand color hovers */
+.social-btn[style*="24292e"]:hover { background: #24292e; color: white !important; }
+.social-linkedin { color: #0077b5; }
+.social-linkedin:hover { background: #0077b5 !important; color: white !important; }
+.social-email { color: #ea4335; }
+.social-email:hover { background: #ea4335 !important; color: white !important; }
+.social-btn[style*="000000"]:hover { background: #000 !important; color: white !important; }
+
+/* BOTTOM BAR */
 .hero-bottom-bar {
   position: relative;
   padding: 0.8rem 4rem 1.2rem 3rem;
@@ -284,21 +298,60 @@
 
 .scroll-arrows span:nth-child(2) { animation-delay: 0.2s; }
 
+/* ===================== MOBILE FIX ===================== */
 @media (max-width: 900px) {
   .hero-main {
     flex-direction: column;
-    padding: 2rem 1.5rem 1rem;
+    padding: 1.5rem 1.5rem 0.8rem;
     text-align: center;
+    align-items: center;
+    width: 100%;
   }
+
   .hero-left {
     width: 100%;
     flex: none;
-    min-height: 300px;
+    min-height: 260px;
+    max-height: 300px;
+    justify-content: center;
   }
-  .hero-photo { width: 70%; max-height: 360px; }
-  .hero-name { font-size: 1.9rem; }
-  .hero-actions { justify-content: center; }
-  .hero-name-underline, .hero-divider { margin: 0 auto 0.7rem; }
-  .hero-bottom-bar { padding: 0.8rem 1.5rem; }
-  .hero-mindset { font-size: 0.85rem; }
+
+  .hero-photo {
+    width: 62%;
+    max-height: 290px;
+  }
+
+  .hero-right {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-this-is { justify-content: center; }
+  .hero-name { font-size: 1.75rem; text-align: center; }
+  .hero-name-underline { margin: 0 auto 0.7rem; }
+  .hero-subtitle { text-align: center; }
+  .hero-divider { margin: 0 auto 0.9rem; }
+  .hero-desc { text-align: center; max-width: 100%; font-size: 0.9rem; }
+
+  .hero-actions { align-items: center; width: 100%; }
+  .hero-cta-row { justify-content: center; }
+  .hero-socials { justify-content: center; }
+
+  .hero-bottom-bar {
+    padding: 0.8rem 1.5rem;
+    justify-content: center;
+  }
+
+  .hero-mindset { font-size: 0.82rem; }
+  .mindset-line { max-width: 60px; }
+  .hero-scroll-corner { display: none; }
+}
+
+@media (max-width: 480px) {
+  .hero-main { padding: 1.2rem 1rem 0.5rem; }
+  .hero-photo { width: 58%; max-height: 250px; }
+  .hero-name { font-size: 1.55rem; }
 }

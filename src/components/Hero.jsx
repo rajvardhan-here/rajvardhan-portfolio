@@ -71,13 +71,15 @@ function Hero() {
           </p>
 
           <div className="hero-actions">
-            <a href="#portfolio" className="btn-view-project">View Project ↗</a>
-            <a href="#contact" className="btn-lets-connect">Let's Connect</a>
+            <div className="hero-cta-row">
+              <a href="#portfolio" className="btn-view-project">View Project ↗</a>
+              <a href="#contact" className="btn-lets-connect">Let's Connect</a>
+            </div>
             <div className="hero-socials">
-              <a href="https://github.com/rajvardhan-here" target="_blank" rel="noreferrer" className="social-btn"><FaGithub /></a>
-              <a href="https://linkedin.com/in/rajvardhann" target="_blank" rel="noreferrer" className="social-btn"><FaLinkedin /></a>
-              <a href="https://x.com/X_rajvardhann" target="_blank" rel="noreferrer" className="social-btn"><FaTwitter /></a>
-              <a href="mailto:rajvardhansinghchouhan1@gmail.com" className="social-btn"><FaEnvelope /></a>
+              <a href="https://github.com/rajvardhan-here" target="_blank" rel="noreferrer" className="social-btn" style={{ color: '#24292e' }}><FaGithub /></a>
+              <a href="https://linkedin.com/in/rajvardhann" target="_blank" rel="noreferrer" className="social-btn social-linkedin"><FaLinkedin /></a>
+              <a href="https://x.com/X_rajvardhann" target="_blank" rel="noreferrer" className="social-btn" style={{ color: '#000000' }}><FaTwitter /></a>
+              <a href="mailto:rajvardhansinghchouhan1@gmail.com" className="social-btn social-email"><FaEnvelope /></a>
             </div>
           </div>
         </div>
@@ -91,7 +93,6 @@ function Hero() {
           <span className="mindset-star">✦</span>
           <span className="mindset-line"></span>
         </div>
-
         <div className="hero-scroll-corner">
           <div className="scroll-mouse">
             <div className="scroll-dot"></div>
