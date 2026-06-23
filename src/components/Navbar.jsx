@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { FaSun, FaMoon, FaExternalLinkAlt } from 'react-icons/fa';
 import '../styles/Navbar.css';
 
-const SECTIONS = ['home','about','skills','portfolio','contact'];
+const SECTIONS = ['Home','about','skills','portfolio','contact'];
 
 function Navbar() {
   const [active, setActive] = useState('home');
