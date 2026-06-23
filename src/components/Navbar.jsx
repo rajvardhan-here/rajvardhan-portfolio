@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { FaSun, FaMoon, FaExternalLinkAlt } from 'react-icons/fa';
 import '../styles/Navbar.css';
 
-const SECTIONS = ['home', 'about', 'skills', 'portfolio', 'contact'];
+const SECTIONS = ['home','about','skills','portfolio','contact'];
 
 function Navbar() {
   const [active, setActive] = useState('home');
@@ -34,11 +34,9 @@ function Navbar() {
   }, []);
 
   const links = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'portfolio', label: 'Projects' },
-    { id: 'contact', label: 'Contact' },
+    { id:'home', label:'Home' }, { id:'about', label:'About' },
+    { id:'skills', label:'Skills' }, { id:'portfolio', label:'Projects' },
+    { id:'contact', label:'Contact' },
   ];
 
   return (
@@ -58,7 +56,7 @@ function Navbar() {
         <button className="theme-btn" onClick={() => setIsDark(!isDark)}>
           {isDark ? <FaSun /> : <FaMoon />}
         </button>
-        <a href="/resume.pdf" download className="btn-view-resume">
+        <a href="/resume.pdf" target="_blank" rel="noreferrer" className="btn-view-resume">
           View Resume <FaExternalLinkAlt size={11} />
         </a>
       </div>

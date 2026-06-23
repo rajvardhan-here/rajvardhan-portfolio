@@ -7,11 +7,13 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Reveal from './components/Reveal';
 import LoadingScreen from './components/LoadingScreen';
+import WaterRipple from './components/WaterRipple';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
+      <WaterRipple />
       <LoadingScreen />
       <Navbar />
       <Hero />

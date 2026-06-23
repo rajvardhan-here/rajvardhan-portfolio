@@ -1,0 +1,19 @@
+.ripple-dot {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(79,117,255,0.45);
+  pointer-events: none;
+  z-index: 9997;
+  animation: rippleOut 0.9s ease-out forwards;
+}
+
+.ripple-dot::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  border: 1px solid rgba(249,115,22,0.25);
+  animation: rippleOut 0.9s ease-out 0.15s forwards;
+}
