@@ -3,74 +3,110 @@ import '../styles/WaterRipple.css';
 
 function WaterRipple() {
   const canvasRef = useRef(null);
-  const ripplesRef = useRef([]);
-  const animRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    let lastTime = 0;
+    let W, H, GW, GH;
+    let buf1, buf2;
+    let rafId, lastMove = 0;
+    let offCanvas, offCtx;
 
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    const init = () => {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width = W;
+      canvas.height = H;
+      GW = Math.floor(W / 5);
+      GH = Math.floor(H / 5);
+      buf1 = new Float32Array(GW * GH);
+      buf2 = new Float32Array(GW * GH);
+      offCanvas = document.createElement('canvas');
+      offCanvas.width = GW;
+      offCanvas.height = GH;
+      offCtx = offCanvas.getContext('2d');
     };
-    resize();
-    window.addEventListener('resize', resize);
 
-    const addRipple = (x, y) => {
-      ripplesRef.current.push({ x, y, r: 0, opacity: 0.7, age: 0 });
+    const disturb = (px, py) => {
+      const gx = Math.floor(px / 5);
+      const gy = Math.floor(py / 5);
+      const r = 4;
+      for (let dy = -r; dy <= r; dy++) {
+        for (let dx = -r; dx <= r; dx++) {
+          if (dx*dx + dy*dy <= r*r) {
+            const nx = gx + dx, ny = gy + dy;
+            if (nx > 1 && nx < GW-2 && ny > 1 && ny < GH-2) {
+              buf1[ny * GW + nx] += 350 * (1 - Math.sqrt(dx*dx+dy*dy) / r);
+            }
+          }
+        }
+      }
     };
 
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ripplesRef.current = ripplesRef.current.filter(r => r.opacity > 0);
-
-      ripplesRef.current.forEach(r => {
-        r.r += 2.8;
-        r.opacity -= 0.013;
-        r.age++;
-
-        for (let ring = 0; ring < 4; ring++) {
-          const rr = r.r - ring * 12;
-          if (rr <= 0) continue;
-          const alpha = r.opacity * (1 - ring * 0.22);
-          ctx.beginPath();
-          ctx.arc(r.x, r.y, rr, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(79,117,255,${alpha.toFixed(2)})`;
-          ctx.lineWidth = Math.max(0.5, 1.8 - ring * 0.4);
-          ctx.stroke();
+    const simulate = () => {
+      for (let y = 1; y < GH-1; y++) {
+        for (let x = 1; x < GW-1; x++) {
+          const i = y * GW + x;
+          buf2[i] = (buf1[i-1] + buf1[i+1] + buf1[i-GW] + buf1[i+GW]) * 0.5 - buf2[i];
+          buf2[i] *= 0.982;
         }
+      }
+      const tmp = buf1; buf1 = buf2; buf2 = tmp;
+    };
 
-        // Center glow
-        if (r.age < 8) {
-          const grd = ctx.createRadialGradient(r.x, r.y, 0, r.x, r.y, 12);
-          grd.addColorStop(0, `rgba(249,115,22,${(r.opacity * 0.4).toFixed(2)})`);
-          grd.addColorStop(1, 'rgba(249,115,22,0)');
-          ctx.beginPath();
-          ctx.arc(r.x, r.y, 12, 0, Math.PI * 2);
-          ctx.fillStyle = grd;
-          ctx.fill();
+    const render = () => {
+      const imageData = offCtx.createImageData(GW, GH);
+      const d = imageData.data;
+      for (let y = 1; y < GH-1; y++) {
+        for (let x = 1; x < GW-1; x++) {
+          const i = y * GW + x;
+          const h = buf1[i];
+          if (Math.abs(h) < 2) continue;
+          const idx = i * 4;
+          const alpha = Math.min(160, Math.abs(h) * 0.55);
+          if (h > 0) {
+            // Light crest - bright teal/white like sunlight through water
+            d[idx]   = 200;
+            d[idx+1] = 235;
+            d[idx+2] = 255;
+          } else {
+            // Dark trough - deep ocean teal
+            d[idx]   = 5;
+            d[idx+1] = 80;
+            d[idx+2] = 140;
+          }
+          d[idx+3] = alpha;
         }
-      });
+      }
+      offCtx.putImageData(imageData, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(offCanvas, 0, 0, W, H);
+    };
 
-      animRef.current = requestAnimationFrame(draw);
+    const loop = () => {
+      simulate();
+      render();
+      rafId = requestAnimationFrame(loop);
     };
 
     const onMove = (e) => {
       const now = Date.now();
-      if (now - lastTime < 55) return;
-      lastTime = now;
-      addRipple(e.clientX, e.clientY);
+      if (now - lastMove < 45) return;
+      lastMove = now;
+      disturb(e.clientX, e.clientY);
     };
 
+    init();
+    window.addEventListener('resize', init, { passive: true });
     window.addEventListener('mousemove', onMove, { passive: true });
-    animRef.current = requestAnimationFrame(draw);
+    rafId = requestAnimationFrame(loop);
 
     return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('resize', init);
       window.removeEventListener('mousemove', onMove);
-      window.removeEventListener('resize', resize);
-      cancelAnimationFrame(animRef.current);
     };
   }, []);
 

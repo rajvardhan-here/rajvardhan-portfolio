@@ -3,32 +3,31 @@ import '../styles/Footer.css';
 function Footer() {
   return (
     <footer className="footer">
-      <div className="water-footer">
-        <div className="water-fill">
-          <div className="water-surface">
-            <div className="wave-svg wave-svg-1">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 100" preserveAspectRatio="none">
-                <path d="M0,40 C180,10 360,70 540,40 C720,10 900,70 1080,40 C1260,10 1380,60 1440,40 L1440,80 L0,80 Z" fill="rgba(79,117,255,0.35)"/>
-              </svg>
-            </div>
-            <div className="wave-svg wave-svg-2">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 80" preserveAspectRatio="none">
-                <path d="M0,50 C240,20 480,65 720,45 C960,25 1200,65 1440,50 L1440,80 L0,80 Z" fill="rgb(252, 151, 63)"/>
-              </svg>
-            </div>
-          </div>
-          <div className="water-body"></div>
+      <div className="footer-water-bg">
+        <div className="fw-wave fw-wave-1">
+          <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,50 C200,20 400,80 600,50 C800,20 1000,80 1200,50 C1320,35 1400,55 1440,50 L1440,100 L0,100 Z"/>
+          </svg>
         </div>
+        <div className="fw-wave fw-wave-2">
+          <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,60 C300,30 600,80 900,55 C1100,40 1300,70 1440,60 L1440,100 L0,100 Z"/>
+          </svg>
+        </div>
+        <div className="fw-wave fw-wave-3">
+          <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,70 C250,45 550,85 850,65 C1100,50 1300,75 1440,70 L1440,100 L0,100 Z"/>
+          </svg>
+        </div>
+      </div>
 
-        <div className="footer-content">
-          <p className="footer-logo">Port<span>folio</span></p>
-          <div className="footer-water-text">
-            <h3 className="water-name">Rajvardhan Singh ,  Thank You For Visiting  </h3>
-            <p className="water-thankyou"> KHAMMA GHANI 🙏 </p>
-            <p className="water-thankyou"></p>
-          </div>
-          <p className="footer-copy">© {new Date().getFullYear()}  </p>
+      <div className="footer-content">
+        <div className="footer-name-block">
+          <span className="footer-name">Rajvardhan Singh</span>
+          <span className="footer-comma">,</span>
+          <span className="footer-thankyou">Thank You For Visiting</span>
         </div>
+        <p className="footer-copy">© {new Date().getFullYear()} Rajvardhan Singh Chouhan · Built with React + Vite</p>
       </div>
     </footer>
   );

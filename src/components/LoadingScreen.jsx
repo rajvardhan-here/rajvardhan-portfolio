@@ -1,38 +1,48 @@
 import { useEffect, useState } from 'react';
 import '../styles/LoadingScreen.css';
 
-const flashes = [
-  { top: '50%', left: '10%', delay: '0s' },
-  { top: '30%', left: '25%', delay: '0.2s' },
-  { top: '60%', left: '40%', delay: '0.4s' },
-  { top: '25%', left: '55%', delay: '0.6s' },
-  { top: '55%', left: '70%', delay: '0.8s' },
-  { top: '35%', left: '85%', delay: '1s' },
-];
+const WORDS = ["It's", "All", "About", "Mindset"];
 
 function LoadingScreen() {
-  const [phase, setPhase] = useState('active');
+  const [visibleCount, setVisibleCount] = useState(0);
+  const [phase, setPhase] = useState('words'); // words → full → explode → done
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-    const t1 = setTimeout(() => setPhase('fadeout'), 2400);
-    const t2 = setTimeout(() => {
+
+    const timers = [];
+    WORDS.forEach((_, i) => {
+      timers.push(setTimeout(() => setVisibleCount(i + 1), 400 + i * 550));
+    });
+
+    // Full sentence glows
+    timers.push(setTimeout(() => setPhase('full'), 400 + WORDS.length * 550 + 300));
+    // Explosion
+    timers.push(setTimeout(() => setPhase('explode'), 400 + WORDS.length * 550 + 1100));
+    // Done
+    timers.push(setTimeout(() => {
       setPhase('done');
       document.body.style.overflow = 'auto';
-    }, 3000);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
+    }, 400 + WORDS.length * 550 + 2000));
+
+    return () => timers.forEach(clearTimeout);
   }, []);
 
   if (phase === 'done') return null;
 
   return (
-    <div className={`loading-screen ${phase === 'fadeout' ? 'loading-fadeout' : ''}`}>
-      <div className="loading-star">⭐</div>
-      {flashes.map((f, i) => (
-        <div key={i} className="loading-flash" style={{ top: f.top, left: f.left, animationDelay: f.delay }} />
-      ))}
-      <div className="loading-ring"></div>
-      <p className="loading-text">Loading<span>.</span><span>.</span><span>.</span></p>
+    <div className={`ls-overlay ${phase === 'explode' ? 'ls-exploding' : ''}`}>
+      <div className="ls-particles">
+        {[...Array(20)].map((_, i) => <span key={i} className="ls-particle" style={{ '--i': i }}></span>)}
+      </div>
+      <div className={`ls-words-wrap ${phase === 'full' ? 'ls-full' : ''} ${phase === 'explode' ? 'ls-explode-text' : ''}`}>
+        {WORDS.map((word, i) => (
+          <span key={word} className={`ls-word ${i < visibleCount ? 'ls-word-visible' : ''} ${word === 'Mindset' ? 'ls-word-key' : ''}`}
+            style={{ '--delay': `${i * 0.05}s` }}>
+            {word}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
