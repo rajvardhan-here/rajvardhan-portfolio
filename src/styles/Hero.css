@@ -10,9 +10,9 @@
 }
 
 .hero-left {
-  position: relative; flex: 0 0 44%; min-height: 520px;
+  position: relative; flex: 0 0 50%; min-height: 520px;
   display: flex; align-items: flex-end; justify-content: center;
-  animation: fadeInUp 0.8s ease forwards;
+  animation: fadeInUp 5s ease forwards;
 }
 
 .hero-paint-bg { position: absolute; inset: 0; z-index: 0; }

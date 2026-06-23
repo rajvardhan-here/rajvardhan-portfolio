@@ -1,157 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&display=swap');
+
+/* Main curtain layer */
 .ls-overlay {
   position: fixed;
   inset: 0;
-  background: radial-gradient(ellipse at center, #0a0e2a 0%, #000510 100%);
+  background-color: #1a1d20; 
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: opacity 0.4s ease;
+  /* GPU-backed hardware transition hint */
+  will-change: transform;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(0);
 }
 
-.ls-overlay.ls-exploding {
-  animation: overlayFlash 1s ease forwards;
+/* Curtain background rolls up perfectly */
+.ls-overlay.ls-curtain-lift {
+  transform: translateY(-100%);
 }
 
-@keyframes overlayFlash {
-  0% { opacity: 1; }
-  40% { opacity: 1; background: radial-gradient(ellipse at center, #fff 0%, #c7d2fe 100%); }
-  100% { opacity: 0; }
-}
-
-/* Floating particles */
-.ls-particles { position: absolute; inset: 0; pointer-events: none; }
-
-.ls-particle {
-  position: absolute;
-  width: 3px; height: 3px; border-radius: 50%;
-  background: rgba(99, 102, 241, 0.6);
-  top: calc(var(--i) * 5% + 5%);
-  left: calc(var(--i) * 5% + 2%);
-  animation: particleDrift calc(3s + var(--i) * 0.3s) ease-in-out infinite alternate;
-}
-
-@keyframes particleDrift {
-  0% { transform: translateY(0) scale(1); opacity: 0.3; }
-  100% { transform: translateY(-30px) scale(1.5); opacity: 0.8; }
-}
-
-/* Words container */
-.ls-words-wrap {
+.ls-text-container {
+  position: relative;
   display: flex;
-  gap: 1.2rem;
-  align-items: baseline;
-  flex-wrap: wrap;
   justify-content: center;
-  padding: 0 2rem;
-  position: relative;
-  z-index: 2;
-  transition: all 0.3s ease;
+  align-items: center;
+  width: 100%;
 }
 
-.ls-full .ls-word {
-  animation: wordGlowPulse 0.6s ease forwards !important;
-}
-
-@keyframes wordGlowPulse {
-  0% { text-shadow: 0 0 20px rgba(99,102,241,0.8); }
-  50% { text-shadow: 0 0 60px rgba(99,102,241,1), 0 0 100px rgba(167,139,250,0.8), 0 0 150px rgba(99,102,241,0.6); letter-spacing: 4px; }
-  100% { text-shadow: 0 0 30px rgba(99,102,241,0.9); }
-}
-
-/* Individual word */
-.ls-word {
-  font-size: clamp(2.5rem, 7vw, 6rem);
-  font-weight: 900;
-  color: rgba(255, 255, 255, 0.15);
-  letter-spacing: 2px;
-  opacity: 0;
-  transform: translateY(40px) scale(0.7);
-  transition: opacity 0.001s;
-  text-transform: uppercase;
-  position: relative;
-  user-select: none;
-}
-
-.ls-word-visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+/* Clean, modern typographic style scale */
+.ls-text {
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: clamp(2.5rem, 7.5vw, 5.5rem);
+  font-weight: 800;
   color: #ffffff;
-  text-shadow: 0 0 30px rgba(99,102,241,0.7), 0 0 60px rgba(99,102,241,0.4);
-  animation: wordEntry 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  white-space: nowrap;
 }
 
-@keyframes wordEntry {
+.ls-mirror-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Base reflection style */
+.ls-text.reflection {
+  margin-top: 10px;
+  opacity: 0.18;
+  transform: scaleY(-1);
+  filter: blur(1px);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%);
+}
+
+/* High Performance Split Wave Frame Layout */
+.ls-wave-split-box {
+  position: relative;
+  display: flex;
+  width: 100vw;
+  height: 250px; 
+  overflow: hidden;
+}
+
+/* Left and right layout container halves */
+.ls-part {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  will-change: transform, opacity;
+}
+
+.left-part {
+  left: 0;
+  animation: glideOutLeft 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.right-part {
+  right: 0;
+  animation: glideOutRight 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Fixed positioning offsets inside container to prevent any frame stuttering or layout-shift jittering */
+.ls-text-aligner-left,
+.ls-text-aligner-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ls-text-aligner-left {
+  left: 0;
+  width: 100vw;
+}
+
+.ls-text-aligner-right {
+  right: 0;
+  width: 100vw;
+}
+
+/* Pure transform based animations for smooth hardware rendering */
+@keyframes glideOutLeft {
   0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
     opacity: 0;
-    transform: translateY(50px) scale(0.5) rotateX(-30deg);
-    filter: blur(20px);
-    color: rgba(99, 102, 241, 0.5);
-  }
-  50% {
-    filter: blur(4px);
-    transform: translateY(-8px) scale(1.15) rotateX(5deg);
-    color: #a5b4fc;
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1) rotateX(0);
-    filter: blur(0);
-    color: #ffffff;
-    text-shadow: 0 0 30px rgba(99,102,241,0.7);
   }
 }
 
-/* "Mindset" gets special treatment */
-.ls-word-key {
-  color: #818cf8;
-  font-size: clamp(3rem, 9vw, 8rem);
-  background: linear-gradient(135deg, #818cf8, #c084fc, #f0abfc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.ls-word-key.ls-word-visible {
-  text-shadow: none;
-  animation: mindsetEntry 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes mindsetEntry {
-  0% { opacity: 0; transform: scale(0.2) rotate(-10deg); filter: blur(30px); }
-  60% { transform: scale(1.25) rotate(2deg); filter: blur(2px); }
-  100% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0); }
-}
-
-/* EXPLOSION */
-.ls-explode-text {
-  animation: textExplosion 0.9s cubic-bezier(0.55, 0, 1, 0.45) forwards !important;
-}
-
-@keyframes textExplosion {
+@keyframes glideOutRight {
   0% {
-    transform: scale(1);
+    transform: translateX(0);
     opacity: 1;
-    filter: blur(0px) brightness(1);
-    letter-spacing: 2px;
-  }
-  30% {
-    transform: scale(4);
-    filter: blur(2px) brightness(2);
-    letter-spacing: 20px;
-    opacity: 1;
-  }
-  60% {
-    transform: scale(18);
-    filter: blur(12px) brightness(5);
-    letter-spacing: 60px;
-    opacity: 0.7;
   }
   100% {
-    transform: scale(50);
-    filter: blur(40px) brightness(10);
-    letter-spacing: 120px;
+    transform: translateX(100%);
     opacity: 0;
   }
 }
