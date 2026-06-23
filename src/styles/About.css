@@ -11,7 +11,7 @@
 
 .about-left {
   flex: 1;
-  max-width: 55%;
+  max-width: 60%;
   position: relative;
   z-index: 2;
 }
@@ -71,22 +71,22 @@
 /* Info bar - no clipping */
 .about-info-bar {
   background: var(--card-bg);
-  border: 1px solid var(--border); border-radius: 14px;
+  border: 7px solid var(--border); border-radius: 20px;
   padding: 0.9rem 1.2rem;
   display: flex; align-items: center; gap: 0.8rem;
   box-shadow: var(--card-shadow); max-width: 100%;
-  backdrop-filter: blur(8px); flex-wrap: nowrap;
+  backdrop-filter: blur(8p  x); flex-wrap: nowrap;
   overflow: hidden;
 }
 .info-item { display: flex; align-items: center; gap: 0.6rem; flex: 1; min-width: 0; }
 .info-icon { font-size: 1rem; color: var(--orange); flex-shrink: 0; }
-.info-label { font-size: 0.72rem; color: var(--orange); font-weight: 600; margin-bottom: 0.1rem; white-space: nowrap; }
+.info-label { font-size: 1rem; color: var(--orange); font-weight: 600; margin-bottom: 0.1rem; white-space: nowrap; }
 .info-value { font-size: 0.72rem; color: var(--text-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .info-divider { width: 1px; height: 36px; background: var(--border); flex-shrink: 0; }
 
 /* Image - properly contained, no overflow */
 .about-right {
-  flex: 0 0 42%;
+  flex: 0 22 50%;
   position: relative;
   display: flex;
   align-items: flex-end;
@@ -98,8 +98,8 @@
   position: absolute;
   bottom: -2rem;
   right: -2rem;
-  height: calc(100% + 2rem);
-  max-height: 95vh;
+  height: calc(100% + 4rem);
+  max-height: 150vh;
   width: auto;
   object-fit: contain;
   object-position: bottom right;

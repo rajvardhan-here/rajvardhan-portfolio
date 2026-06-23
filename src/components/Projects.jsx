@@ -50,7 +50,7 @@ function Projects() {
 
       <div className="projects-grid">
         {projects.map((proj,i) => (
-          <div className="project-card" key={proj.name} style={{ marginTop:`${hangOffsets[i]}px`, animationDelay:`${i*0.5}s` }}>
+          <div className="project-card" key={proj.name} style={{ marginTop:`${hangOffsets[i]}px`, animationDelay:`${i*0.9}s` }}>
             <div className="project-card-header">
               <div className="project-icon" style={{ background:`${proj.iconBg}20`, color:proj.iconBg }}>{proj.icon}</div>
               <div>

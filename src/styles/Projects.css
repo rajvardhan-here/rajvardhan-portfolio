@@ -1,5 +1,5 @@
 .projects {
-  padding: 2rem 3rem 4rem;
+  padding: 1rem 3rem 3rem;
   position: relative;
 }
 
@@ -19,21 +19,21 @@
 
 /* GLOWING ROPE - full width */
 .rope-container {
-  position: relative; height: 65px;
+  position: relative; height: 50px;
   width: 100%; margin: 0.8rem 0 0;
 }
 
 .rope {
-  position: absolute; top: 18px; left: 0; width: 100%; height: 7px;
+  position: absolute; top: 18px; left: 0; width: 100%; height: 5px;
   background: linear-gradient(90deg,#92400e,#ca8a04,#fbbf24,#f59e0b,#ca8a04,#92400e);
   border-radius: 4px;
-  animation: ropeGlow 2.5s ease-in-out infinite;
+  animation: ropeGlow 1s ease-in-out infinite;
 }
 
 .binder-clip {
   position: absolute; top: 6px;
   transform: translateX(-50%);
-  width: 40px; height: 52px;
+  width: 40px; height: 50px;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 .binder-clip svg { width: 100%; height: 100%; }
@@ -42,21 +42,21 @@
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  gap: 5rem;
   align-items: start;
   padding-top: 0.5rem;
 }
 
 /* GLASSMORPHISM CARDS */
 .project-card {
-  background: rgba(255,255,255,0.6);
+  background: #cdbf26;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.7);
-  border-radius: 18px; padding: 1.3rem;
-  box-shadow: 0 8px 32px rgba(79,117,255,0.1), 0 2px 8px rgba(0,0,0,0.06);
+  border-radius: 70px; padding: 1.3rem;
+  box-shadow: 0 8px 32px rgba(79,117,255,10), 0 2px 8px rgba(147, 162, 15, 0.696);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: swingCard 5s ease-in-out infinite;
+  animation: swingCard 3s ease-in-out infinite;
   transform-origin: top center;
 }
 
@@ -72,7 +72,7 @@ body.dark-theme .project-card {
 
 .project-card:hover {
   transform: translateY(-6px) rotate(0deg) !important;
-  box-shadow: 0 16px 48px rgba(79,117,255,0.18), 0 0 0 1.5px var(--blue);
+  box-shadow: 0 16px 48px rgba(79,117,255,70), 0 0 0 1.5px var(--blue);
   animation-play-state: paused;
 }
 
@@ -101,7 +101,7 @@ body.dark-theme .project-card {
   font-weight:600; font-size:0.8rem; transition:all 0.2s ease;
   box-shadow:0 4px 12px rgba(249,115,22,0.3);
 }
-.btn-live:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(249,115,22,0.4); }
+.btn-live:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(249,115,22,2); }
 
 .btn-github {
   display:inline-flex; align-items:center; gap:0.35rem;
