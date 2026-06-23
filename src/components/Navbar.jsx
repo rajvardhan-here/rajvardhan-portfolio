@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { FaSun, FaMoon, FaExternalLinkAlt } from 'react-icons/fa';
 import '../styles/Navbar.css';
 
+const SECTIONS = ['home', 'about', 'skills', 'portfolio', 'contact'];
+
 function Navbar() {
   const [active, setActive] = useState('home');
   const [isDark, setIsDark] = useState(false);
@@ -15,6 +17,20 @@ function Navbar() {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const observers = SECTIONS.map((id) => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActive(id); },
+        { rootMargin: '-40% 0px -55% 0px' }
+      );
+      obs.observe(el);
+      return obs;
+    });
+    return () => observers.forEach((o) => o?.disconnect());
   }, []);
 
   const links = [

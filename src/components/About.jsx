@@ -71,7 +71,6 @@ function About() {
       </div>
 
       <div className="about-right">
-        <div className="about-img-glow"></div>
         <img src={aboutImg} alt="About Rajvardhan" className="about-img" />
       </div>
     </section>
