@@ -1,10 +1,11 @@
 .skills {
-  padding: 4rem 1rem;
-  display: flex; 
+  padding: 2rem 1rem 2.5rem;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3.5rem; 
+  gap: 2rem;
   position: relative;
+  overflow: hidden; /* prevent chips going off screen */
 }
 
 .skills-header { text-align: center; }
@@ -19,29 +20,29 @@
 .skills-subtitle { font-size: 0.9rem; color: var(--text-body); font-weight: 500; }
 .subtitle-accent { color: var(--blue); font-weight: 700; }
 
-/* ===== THE PERIMETER LOOP RACETRACK ===== */
+/* ===== RACETRACK CONTAINER — wider so chips stay in viewport ===== */
 .sk-loop-container {
   position: relative;
-  width: 100%;
-  max-width: 980px;
-  height: 520px; /* Provides tracking depth allowance space around center-card */
+  width: 92vw;
+  max-width: 1240px;
+  height: 440px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* CHIP - Positioned to travel on the specified vector line */
+/* CHIPS orbit the rectangle perimeter */
 .sk-chip {
   position: absolute;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.25rem;
   background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 0.6rem 0.85rem 0.5rem;
-  min-width: 72px;
+  border-radius: 10px;
+  padding: 0.5rem 0.7rem 0.4rem;
+  min-width: 64px;
   box-sizing: border-box;
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   cursor: default;
@@ -49,10 +50,9 @@
   overflow: hidden;
   z-index: 5;
 
-  /* Path loop setup framing the layout boundary */
-  offset-path: rect(0% 100% 100% 0% round 45px);
-  offset-rotate: 0deg; /* Prevents text upside down re-orientations along the loop sides */
-  animation: perimeterTrackLoop 35s linear infinite;
+  offset-path: rect(0% 100% 100% 0% round 40px);
+  offset-rotate: 0deg;
+  animation: perimeterTrackLoop 38s linear infinite;
 }
 
 @keyframes perimeterTrackLoop {
@@ -62,74 +62,56 @@
 
 .sk-chip::after {
   content: '';
-  position: absolute; inset: 0; border-radius: 12px;
-  background: radial-gradient(160px circle at var(--gx,50%) var(--gy,50%), rgba(8,145,178,0.3), transparent 65%);
+  position: absolute; inset: 0; border-radius: 10px;
+  background: radial-gradient(140px circle at var(--gx,50%) var(--gy,50%), rgba(79,117,255,0.28), transparent 65%);
   opacity: 0; transition: opacity 0.3s; pointer-events: none;
 }
 .sk-chip:hover::after { opacity: 1; }
 .sk-chip:hover {
-  transform: scale(1.1);
+  transform: scale(1.12);
   border-color: var(--blue);
-  box-shadow: 0 8px 24px rgba(8,145,178,0.22), 0 0 0 1px rgba(8,145,178,0.3);
+  box-shadow: 0 8px 24px rgba(79,117,255,0.25), 0 0 0 1.5px rgba(79,117,255,0.3);
+  z-index: 10;
 }
-.sk-chip img { width: 20px; height: 20px; object-fit: contain; position: relative; z-index: 1; }
-.sk-chip span { font-size: 0.68rem; font-weight: 600; color: var(--text-body); white-space: nowrap; position: relative; z-index: 1; }
 
-/* CENTER CARD */
+.sk-chip img { width: 24px; height: 24px; object-fit: contain; position: relative; z-index: 1; }
+.sk-chip span { font-size: 0.64rem; font-weight: 600; color: var(--text-body); white-space: nowrap; position: relative; z-index: 1; }
+
+/* CENTER CARD — sized to fill interior of loop */
 .sk-center-card {
-  width: 80%;
-  height: 65%;
+  width: 72%;
+  height: 62%;
   background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 50px; 
-  padding: 2.5rem 2rem;
+  border: 1.5px solid var(--border);
+  border-radius: 24px;
+  padding: 2rem 2.5rem;
   backdrop-filter: blur(16px);
   box-shadow: var(--card-shadow);
-  position: relative; 
+  position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   z-index: 2;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-.sk-center-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(8,145,178,0.18); }
+.sk-center-card:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(79,117,255,0.16); }
 
-.sk-center-card::before { content: ''; position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(249,115,22,0.08) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
-.sk-center-card::after { content: ''; position: absolute; bottom: -60px; left: -60px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(8,145,178,0.08) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+.sk-center-card::before { content:''; position:absolute; top:-60px; right:-60px; width:180px; height:180px; background:radial-gradient(circle, rgba(249,115,22,0.07) 0%, transparent 70%); border-radius:50%; pointer-events:none; }
+.sk-center-card::after { content:''; position:absolute; bottom:-60px; left:-60px; width:180px; height:180px; background:radial-gradient(circle, rgba(79,117,255,0.07) 0%, transparent 70%); border-radius:50%; pointer-events:none; }
 
-.sk-center-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem 5rem; width: 100%; position: relative; z-index: 1; }
-.center-star { color: var(--blue); font-size: 1rem; text-align: center; grid-column: 1/-1; pointer-events: none; }
+.sk-center-inner { display:grid; grid-template-columns:1fr 1fr; gap:1.8rem 3rem; width:100%; position:relative; z-index:1; }
+.center-star { color:var(--blue); font-size:0.95rem; text-align:center; grid-column:1/-1; pointer-events:none; }
 
-.spec-item { display: flex; align-items: flex-start; gap: 0.9rem; }
-.spec-icon-wrap { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.spec-text { flex: 1; }
-.spec-title { font-size: 0.98rem; font-weight: 700; color: var(--text-heading); border-bottom: 2.5px solid; padding-bottom: 0.25rem; margin-bottom: 0.35rem; display: inline-block; margin-top: 0; }
-.spec-desc { font-size: 0.8rem; color: var(--text-body); line-height: 1.4; margin: 0; }
+.spec-item { display:flex; align-items:flex-start; gap:0.8rem; }
+.spec-icon-wrap { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.spec-text { flex:1; }
+.spec-title { font-size:0.92rem; font-weight:700; color:var(--text-heading); border-bottom:2.5px solid; padding-bottom:0.22rem; margin-bottom:0.3rem; display:inline-block; }
+.spec-desc { font-size:0.76rem; color:var(--text-body); line-height:1.4; }
 
-/* RESPONSIVE LAYOUT CLEAN UP */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .skills { padding: 2rem 1rem 2.5rem; }
-  .sk-loop-container {
-    height: auto;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  .sk-center-card {
-    width: 100%;
-    height: auto;
-    padding: 2rem 1.5rem;
-    border-radius: 24px;
-  }
-  .sk-center-inner { grid-template-columns: 1fr; gap: 1.5rem; }
-  
-  /* Fallback down onto static flex grid layout execution structures for screen width limitations */
-  .sk-chip {
-    position: static;
-    offset-path: none;
-    animation: none;
-    display: inline-flex;
-    width: auto;
-    flex-direction: row;
-    padding: 0.5rem 1rem;
-  }
+  .sk-loop-container { height: auto; flex-direction: column; gap: 1.5rem; }
+  .sk-center-card { width: 100%; height: auto; padding: 1.5rem; }
+  .sk-center-inner { grid-template-columns: 1fr; gap: 1.2rem; }
+  .sk-chip { position: static; offset-path: none; animation: none; display: inline-flex; width: auto; flex-direction: row; padding: 0.45rem 0.9rem; }
 }

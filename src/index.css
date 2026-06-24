@@ -66,6 +66,12 @@ body.dark-theme .about-img { mix-blend-mode: normal; opacity: 0.92; }
 body.dark-theme .spec-title,
 body.dark-theme .project-name,
 body.dark-theme .about-heading { color: var(--text-heading); }
+/* Dark theme social icon fixes — add at end of index.css */
+body.dark-theme .social-github { color: #e0e0e0 !important; }
+body.dark-theme .social-twitter { color: #d0d0d0 !important; }
+body.dark-theme .social-btn { background: rgba(255,255,255,0.1) !important; border-color: rgba(255,255,255,0.15) !important; }
+body.dark-theme .social-github:hover { background: #e0e0e0 !important; color: #24292e !important; }
+body.dark-theme .social-twitter:hover { background: #ffffff !important; color: #000 !important; }
 
 .section-label {
   display: inline-flex; align-items: center; gap: 0.5rem;

@@ -25,7 +25,7 @@ const allSkills = [
 ];
 
 const specs = [
-  { color:'#0891b2', bgColor:'rgba(8,145,178,0.12)', emoji:'</>', title:'Full Stack Developer', desc:'Building complete web applications from frontend to backend.' },
+  { color:'#4f75ff', bgColor:'rgba(79,117,255,0.12)', emoji:'</>', title:'Full Stack Developer', desc:'Building complete web applications from frontend to backend.' },
   { color:'#f97316', bgColor:'rgba(249,115,22,0.12)', emoji:'📊', title:'Presenter', desc:'Designing impactful presentations that communicate ideas clearly.' },
   { color:'#8b5cf6', bgColor:'rgba(139,92,246,0.12)', emoji:'🎬', title:'Video Editor', desc:'Creating engaging videos with smooth transitions and effects.' },
   { color:'#ef4444', bgColor:'rgba(239,68,68,0.12)', emoji:'☕', title:'Java DSA', desc:'Solving complex problems and building strong logic with Java.' },
@@ -49,7 +49,7 @@ function SkillChip({ name, img, delay }) {
 
 function Skills() {
   const totalSkills = allSkills.length;
-  const loopDuration = 35; // Total seconds for one full lap around the card
+  const loopDuration = 38;
 
   return (
     <section id="skills" className="skills">
@@ -64,16 +64,13 @@ function Skills() {
         <p className="skills-subtitle">Technologies | <span className="subtitle-accent">Work With</span></p>
       </div>
 
-      {/* THE RACETRACK OUTER BOUND CONTAINER */}
       <div className="sk-loop-container">
-        
-        {/* CENTER CARD */}
         <div className="sk-center-card">
           <div className="sk-center-inner">
             {specs.map(spec => (
               <div className="spec-item" key={spec.title}>
                 <div className="spec-icon-wrap" style={{ background: spec.bgColor }}>
-                  <span style={{ fontSize: '1.4rem' }}>{spec.emoji}</span>
+                  <span style={{ fontSize: '1.3rem' }}>{spec.emoji}</span>
                 </div>
                 <div className="spec-text">
                   <p className="spec-title" style={{ borderBottomColor: spec.color }}>{spec.title}</p>
@@ -85,13 +82,10 @@ function Skills() {
           </div>
         </div>
 
-        {/* MAPPED LOOPING BORDER SKILL CHIPS */}
         {allSkills.map((s, i) => {
-          // Stagger the dynamic start times perfectly along the perimeter path loop
-          const calculationDelay = `calc(-${loopDuration}s / ${totalSkills} * ${i})`;
-          return <SkillChip key={i} {...s} delay={calculationDelay} />;
+          const delay = `calc(-${loopDuration}s / ${totalSkills} * ${i})`;
+          return <SkillChip key={i} {...s} delay={delay} />;
         })}
-
       </div>
     </section>
   );
