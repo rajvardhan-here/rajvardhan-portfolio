@@ -21,7 +21,7 @@ const projects = [
 ];
 
 // Wire heights along the catenary
-const wireHeights = [38, 22, 42];
+const wireHeights = [55, 40 , 60];
 
 function onMouseMove(e) {
   const card = e.currentTarget;
