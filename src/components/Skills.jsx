@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import '../styles/Skills.css';
 
-const topSkills = [
+const allSkills = [
   { name:'HTML', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
   { name:'CSS', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
   { name:'JavaScript', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
@@ -12,9 +12,6 @@ const topSkills = [
   { name:'Git', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
   { name:'Tailwind', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
   { name:'Bootstrap', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
-];
-
-const bottomSkills = [
   { name:'Python', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
   { name:'Java', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
   { name:'MySQL', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
@@ -34,7 +31,7 @@ const specs = [
   { color:'#ef4444', bgColor:'rgba(239,68,68,0.12)', emoji:'☕', title:'Java DSA', desc:'Solving complex problems and building strong logic with Java.' },
 ];
 
-function SkillChip({ name, img }) {
+function SkillChip({ name, img, delay }) {
   const ref = useRef(null);
   const onMove = (e) => {
     if (!ref.current) return;
@@ -43,7 +40,7 @@ function SkillChip({ name, img }) {
     ref.current.style.setProperty('--gy', `${e.clientY - r.top}px`);
   };
   return (
-    <div className="sk-chip" ref={ref} onMouseMove={onMove}>
+    <div className="sk-chip" ref={ref} onMouseMove={onMove} style={{ animationDelay: delay }}>
       <img src={img} alt={name} onError={e => { e.target.style.display='none'; }}/>
       <span>{name}</span>
     </div>
@@ -51,6 +48,9 @@ function SkillChip({ name, img }) {
 }
 
 function Skills() {
+  const totalSkills = allSkills.length;
+  const loopDuration = 35; // Total seconds for one full lap around the card
+
   return (
     <section id="skills" className="skills">
       <div className="skills-header">
@@ -64,36 +64,34 @@ function Skills() {
         <p className="skills-subtitle">Technologies | <span className="subtitle-accent">Work With</span></p>
       </div>
 
-      {/* TOP MARQUEE */}
-      <div className="sk-marquee-wrap">
-        <div className="sk-marquee">
-          {[...topSkills, ...topSkills].map((s, i) => <SkillChip key={i} {...s}/>)}
-        </div>
-      </div>
-
-      {/* CENTER CARD */}
-      <div className="sk-center-card">
-        <div className="sk-center-inner">
-          {specs.map(spec => (
-            <div className="spec-item" key={spec.title}>
-              <div className="spec-icon-wrap" style={{ background: spec.bgColor }}>
-                <span style={{ fontSize: '1.4rem' }}>{spec.emoji}</span>
+      {/* THE RACETRACK OUTER BOUND CONTAINER */}
+      <div className="sk-loop-container">
+        
+        {/* CENTER CARD */}
+        <div className="sk-center-card">
+          <div className="sk-center-inner">
+            {specs.map(spec => (
+              <div className="spec-item" key={spec.title}>
+                <div className="spec-icon-wrap" style={{ background: spec.bgColor }}>
+                  <span style={{ fontSize: '1.4rem' }}>{spec.emoji}</span>
+                </div>
+                <div className="spec-text">
+                  <p className="spec-title" style={{ borderBottomColor: spec.color }}>{spec.title}</p>
+                  <p className="spec-desc">{spec.desc}</p>
+                </div>
               </div>
-              <div className="spec-text">
-                <p className="spec-title" style={{ borderBottomColor: spec.color }}>{spec.title}</p>
-                <p className="spec-desc">{spec.desc}</p>
-              </div>
-            </div>
-          ))}
-          <div className="center-star">✦</div>
+            ))}
+            <div className="center-star">✦</div>
+          </div>
         </div>
-      </div>
 
-      {/* BOTTOM MARQUEE (reverse) */}
-      <div className="sk-marquee-wrap">
-        <div className="sk-marquee sk-marquee-reverse">
-          {[...bottomSkills, ...bottomSkills].map((s, i) => <SkillChip key={i} {...s}/>)}
-        </div>
+        {/* MAPPED LOOPING BORDER SKILL CHIPS */}
+        {allSkills.map((s, i) => {
+          // Stagger the dynamic start times perfectly along the perimeter path loop
+          const calculationDelay = `calc(-${loopDuration}s / ${totalSkills} * ${i})`;
+          return <SkillChip key={i} {...s} delay={calculationDelay} />;
+        })}
+
       </div>
     </section>
   );
