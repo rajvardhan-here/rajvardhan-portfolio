@@ -30,7 +30,7 @@
   animation: fadeInUp 0.8s ease 0.2s forwards; opacity: 0;
 }
 
-.hero-this-is { display: flex; align-items: center; gap: 0.8rem; font-size: 0.95rem; color: var(--text-body); margin-bottom: 0.7rem; font-weight: 500; }
+.hero-this-is { display: flex; align-items: center; gap: 0.8rem; font-size: 1.1rem; color: var(--text-body); margin-bottom: 0.7rem; font-weight: 500; }
 .this-is-line { display: inline-block; width: 36px; height: 2px; background: var(--orange); border-radius: 2px; }
 
 .hero-name {
@@ -63,7 +63,7 @@
   transition: all 0.3s ease;
   box-shadow: 0 6px 20px rgba(249,115,22,0.35);
   position: relative; overflow: hidden;
-  animation: floatBtn 3s ease-in-out infinite;
+  animation: floatBtn 2s ease-in-out infinite;
   isolation: isolate; /* creates new stacking context */
 }
 .btn-view-project::before {
@@ -81,15 +81,16 @@
 
 .btn-lets-connect {
   font-weight: 600; color: var(--text-body); font-size: 0.95rem;
-  border-bottom: 2px solid var(--text-muted); padding-bottom: 1px;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  border-bottom: 2px solid var(--text-muted); padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 1s ease;
+  animation: floatBtn 2s ease-in-out infinite;
 }
 .btn-lets-connect:hover { color: var(--blue); border-color: var(--blue); }
 
-.hero-socials { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.hero-socials { display: flex; gap: 1.6rem; flex-wrap: wrap; }
 
 .social-btn {
-  width: 36px; height: 36px; border-radius: 50%;
+  width: 40px; height: 40px; border-radius: 50%;
   background: var(--white); border: 1.5px solid var(--border);
   display: flex; align-items: center; justify-content: center;
   font-size: 0.95rem; transition: all 0.25s ease;
