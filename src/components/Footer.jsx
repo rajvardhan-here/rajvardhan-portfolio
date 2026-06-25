@@ -5,7 +5,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-water-bg">
         <div className="fw-wave fw-wave-1">
-          <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 11 1440 100 " preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0,50 C200,20 400,80 600,50 C800,20 1000,80 1200,50 C1320,35 1400,55 1440,50 L1440,100 L0,100 Z"/>
           </svg>
         </div>
@@ -23,12 +23,11 @@ function Footer() {
 
       <div className="footer-content">
         <div className="footer-name-block">
-          <span className="footer-name">Rajvardhan Singh</span>
-          <span className="footer-comma">,</span>
+          <span className="footer-name">Khmma Ghani </span>
+          <span className="footer-comma">&</span>
           <span className="footer-thankyou">Thank You For Visiting</span>
         </div>
-        <p className="footer-copy">© {new Date().getFullYear()} Rajvardhan Singh Chouhan · Built with React + Vite</p>
-      </div>
+          </div>
     </footer>
   );
 }

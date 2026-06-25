@@ -18,18 +18,18 @@
   color: var(--text-body); font-size: 0.9rem; line-height: 1.5;
 }
 
-/* REAL ROPE */
 .rope-wrap {
   position: relative; width: 100%; height: 85px; margin: 0; overflow: visible;
 }
-.rope-svg { position: absolute; top: 0; left: -2%; width: 104%; height: 85px; overflow: visible; }
+.rope-svg {
+  position: absolute; top: 0; left: -2%; width: 104%; height: 85px; overflow: visible;
+}
 
 .binder-clip {
   position: absolute; transform: translateX(-50%);
   filter: drop-shadow(0 3px 5px rgba(0,0,0,0.35)); z-index: 2;
 }
 
-/* HANGING GRID */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -41,19 +41,18 @@
 .card-hanger { display: flex; flex-direction: column; align-items: center; }
 
 .hanger-wire {
-  width: 4px;
+  width: 3px;
   background: linear-gradient(180deg, #8B4513, #5C2E0A);
   flex-shrink: 0;
 }
 
-/* PROJECT CARD - smaller for viewport fit */
 .project-card {
   background: #cdbf26;
-  border: 1px solid rgb(193, 24, 24);
-  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 16px;
   padding: 1rem;
   width: 100%;
-  box-shadow: 0 10px 15px rgb(198, 21, 95);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
   animation: swingCard 3s ease-in-out infinite;
   transform-origin: top center;
   will-change: transform;
@@ -72,14 +71,21 @@ body.dark-theme .project-card { border-color: rgba(255,255,255,0.2); }
 .project-subtitle { font-size:0.72rem; font-weight:600; }
 
 .project-screenshot {
-  width:100%; height:110px; border-radius:8px; overflow:hidden;
+  width:100%; height:120px; border-radius:8px; overflow:hidden;
   margin-bottom:0.7rem;
   background:rgba(0,0,0,0.1);
-  border:1px solid rgba(255,255,255,0.3);
+  border:1px solid rgba(255,255,255,0.35);
 }
-.project-screenshot img { width:100%; height:100%; object-fit:cover; transition:transform 0.3s ease; }
-.project-card:hover .project-screenshot img { transform:scale(1.04); }
-.project-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:rgba(0,0,0,0.35); font-weight:600; font-size:0.9rem; }
+.project-screenshot img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform 0.4s ease;
+}
+.project-card:hover .project-screenshot img { transform:scale(1.06); }
+.project-placeholder {
+  width:100%; height:100%;
+  display:flex; align-items:center; justify-content:center;
+  color:rgba(0,0,0,0.3); font-weight:600; font-size:0.9rem;
+}
 
 .project-desc { font-size:0.76rem; color:rgba(0,0,0,0.65); line-height:1.5; margin-bottom:0.8rem; }
 .project-btns { display:flex; gap:0.5rem; flex-wrap:wrap; }

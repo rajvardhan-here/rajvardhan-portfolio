@@ -1,5 +1,6 @@
 import { FaGithub, FaExternalLinkAlt, FaClock } from 'react-icons/fa';
 import habitfyImg from '../assets/habitfy.png';
+import medicareImg from '../assets/medicare.png';
 import '../styles/Projects.css';
 
 const projects = [
@@ -11,7 +12,7 @@ const projects = [
   {
     icon:'➕', iconBg:'#3b82f6', name:'Medicare', subtitle:'Healthcare Platform', subtitleColor:'#3b82f6',
     desc:'Smart healthcare platform for appointment booking, patient management, and secure medical report storage.',
-    image:null, live:'https://healthcare-backend-beige.vercel.app', github:'https://github.com/healthcare-project-team/healthcare-project', status:'live',
+    image:medicareImg, live:'https://healthcare-backend-beige.vercel.app', github:'https://github.com/healthcare-project-team/healthcare-project', status:'live',
   },
   {
     icon:'🚀', iconBg:'#8b5cf6', name:'Project 3', subtitle:'Coming Soon', subtitleColor:'#8b5cf6',
@@ -20,8 +21,7 @@ const projects = [
   },
 ];
 
-// Wire heights along the catenary
-const wireHeights = [55, 40 , 60];
+const wireHeights = [55, 40, 60];
 
 function onMouseMove(e) {
   const card = e.currentTarget;
@@ -53,24 +53,16 @@ function Projects() {
         <p className="projects-sub">A collection of projects focused on solving real-world problems through clean design, scalable architecture, and practical development.</p>
       </div>
 
-      {/* REAL ROPE - full width catenary */}
       <div className="rope-wrap">
         <svg className="rope-svg" viewBox="0 0 1600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          {/* Drop shadow */}
           <path d="M-50,44 C200,75 450,82 800,85 C1150,82 1400,75 1650,44" stroke="rgba(0,0,0,0.22)" strokeWidth="10" fill="none" strokeLinecap="round"/>
-          {/* Rope base - dark brown */}
           <path d="M-50,34 C200,65 450,72 800,75 C1150,72 1400,65 1650,34" stroke="#5C2E0A" strokeWidth="12" fill="none" strokeLinecap="round"/>
-          {/* Twist strand 1 - medium brown */}
           <path d="M-50,32 C200,63 450,70 800,73 C1150,70 1400,63 1650,32" stroke="#8B4513" strokeWidth="6" fill="none" strokeLinecap="round" strokeDasharray="18 12"/>
-          {/* Twist strand 2 - lighter, offset */}
           <path d="M-50,36 C200,67 450,74 800,77 C1150,74 1400,67 1650,36" stroke="#A0522D" strokeWidth="5" fill="none" strokeLinecap="round" strokeDasharray="18 12" strokeDashoffset="15"/>
-          {/* Fiber highlight */}
           <path d="M-50,31 C200,62 450,69 800,72 C1150,69 1400,62 1650,31" stroke="rgba(220,160,100,0.4)" strokeWidth="2" fill="none" strokeLinecap="round" strokeDasharray="7 18" strokeDashoffset="5"/>
-          {/* Dark fiber */}
           <path d="M-50,37 C200,68 450,75 800,78 C1150,75 1400,68 1650,37" stroke="rgba(40,15,5,0.5)" strokeWidth="2" fill="none" strokeLinecap="round" strokeDasharray="9 16" strokeDashoffset="9"/>
         </svg>
 
-        {/* Binder clips positioned along curve */}
         <div className="binder-clip" style={{ left:'16%', top:'28px' }}>
           <svg viewBox="0 0 40 52" xmlns="http://www.w3.org/2000/svg" width="34" height="50">
             <rect x="10" y="6" width="20" height="24" rx="3" fill="#444"/>
@@ -108,7 +100,10 @@ function Projects() {
                 </div>
               </div>
               <div className="project-screenshot">
-                {proj.image ? <img src={proj.image} alt={proj.name}/> : <div className="project-placeholder"><span>{proj.name}</span></div>}
+                {proj.image
+                  ? <img src={proj.image} alt={proj.name}/>
+                  : <div className="project-placeholder"><span>{proj.name}</span></div>
+                }
               </div>
               <p className="project-desc">{proj.desc}</p>
               <div className="project-btns">

@@ -8,11 +8,13 @@ import Footer from './components/Footer';
 import Reveal from './components/Reveal';
 import LoadingScreen from './components/LoadingScreen';
 import WaterRipple from './components/WaterRipple';
+import ZoomNotice from './components/ZoomNotice';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
+      <ZoomNotice />
       <WaterRipple />
       <LoadingScreen />
       <Navbar />
