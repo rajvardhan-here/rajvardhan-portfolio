@@ -76,6 +76,12 @@
 
 .sk-chip img { width: 24px; height: 24px; object-fit: contain; position: relative; z-index: 1; }
 .sk-chip span { font-size: 0.64rem; font-weight: 600; color: var(--text-body); white-space: nowrap; position: relative; z-index: 1; }
+.sk-chip-emoji {
+  font-size: 1.2rem;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
 
 /* CENTER CARD — sized to fill interior of loop */
 .sk-center-card {

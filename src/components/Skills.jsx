@@ -15,13 +15,12 @@ const allSkills = [
   { name:'Python', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
   { name:'Java', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
   { name:'MySQL', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
-  { name:'TypeScript', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
-  { name:'Next.js', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
   { name:'Figma', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' },
-  { name:'VS Code', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg' },
-  { name:'Postman', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg' },
-  { name:'Firebase', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
-  { name:'Linux', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg' },
+  { name:'Intel', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intel/intel-original.svg' },
+  { name:'Docker', img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+  { name:'Premiere Pro', img:'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/premierepro/premierepro-original.svg', emoji:'🎬' },
+  { name:'After Effects', img:'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/aftereffects/aftereffects-original.svg', emoji:'✨' },
+  { name:'Public Speaking', img:null, emoji:'🎙️' },
 ];
 
 const specs = [
@@ -31,7 +30,7 @@ const specs = [
   { color:'#ef4444', bgColor:'rgba(239,68,68,0.12)', emoji:'☕', title:'Java DSA', desc:'Solving complex problems and building strong logic with Java.' },
 ];
 
-function SkillChip({ name, img, delay }) {
+function SkillChip({ name, img, emoji, delay }) {
   const ref = useRef(null);
   const onMove = (e) => {
     if (!ref.current) return;
@@ -39,9 +38,25 @@ function SkillChip({ name, img, delay }) {
     ref.current.style.setProperty('--gx', `${e.clientX - r.left}px`);
     ref.current.style.setProperty('--gy', `${e.clientY - r.top}px`);
   };
+
   return (
     <div className="sk-chip" ref={ref} onMouseMove={onMove} style={{ animationDelay: delay }}>
-      <img src={img} alt={name} onError={e => { e.target.style.display='none'; }}/>
+      {img ? (
+        <img
+          src={img}
+          alt={name}
+          onError={e => {
+            e.target.style.display = 'none';
+            // show emoji sibling
+            const em = e.target.nextSibling;
+            if (em) em.style.display = 'block';
+          }}
+        />
+      ) : null}
+      {/* Emoji fallback — hidden by default if img exists, shown if img fails or no img */}
+      <span className="sk-chip-emoji" style={{ display: img ? 'none' : 'block' }}>
+        {emoji || '🔧'}
+      </span>
       <span>{name}</span>
     </div>
   );
