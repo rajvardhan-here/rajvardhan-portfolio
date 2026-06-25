@@ -3,7 +3,7 @@ import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
 import heroImg from '../assets/hero.png';
 import '../styles/Hero.css';
 
-const roles = ['Full Stack Developer','React Developer','Java DSA Learner','Building in Public'];
+const roles = ['Full Stack Developer','Java DSA Learner','Building in Public','Video Editor'];
 
 function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);

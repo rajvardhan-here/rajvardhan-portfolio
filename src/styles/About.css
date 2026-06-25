@@ -69,7 +69,7 @@
   gap: 0.6rem; flex-wrap: wrap;
   box-shadow: var(--card-shadow);
   backdrop-filter: blur(8px);
-  max-width: 100%;
+  max-width: 80%;
 }
 
 .info-item {
@@ -84,12 +84,12 @@
 
 /* About image - fixed positioning */
 .about-right {
-  flex: 0 0 42%;
+  flex: 0 0 50%;
   position: relative;
   align-self: stretch;
-  min-height: 420px;
+  min-height: 550px;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 10px;
 }
 
 .about-img-glow {
@@ -107,8 +107,8 @@
   object-fit: cover;
   object-position: top center; /* show the character's face/upper body */
   mix-blend-mode: multiply;
-  border-radius: 16px;
-  transition: transform 0.4s ease;
+  border-radius: 50px;
+  transition: transform 3 s ease;
 }
 .about-right:hover .about-img { transform: scale(1.03); }
 body.dark-theme .about-img { mix-blend-mode: normal; opacity: 0.88; }

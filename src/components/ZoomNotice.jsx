@@ -7,10 +7,10 @@ function ZoomNotice() {
 
   useEffect(() => {
     // Show after tiny delay so it slides in after page loads
-    const showTimer = setTimeout(() => setVisible(true), 600);
+    const showTimer = setTimeout(() => setVisible(true), 1000);
 
     // Start hide animation at 3.5s
-    const hideTimer = setTimeout(() => setHiding(true), 3500);
+    const hideTimer = setTimeout(() => setHiding(true), 6000);
 
     // Remove from DOM at 4.2s
     const removeTimer = setTimeout(() => setVisible(false), 4200);
